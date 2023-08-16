@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1t3qluusepp6"]
+
+[ext_resource type="PackedScene" uid="uid://d3mjlgbikei1o" path="res://connector.tscn" id="1_25fy5"]
+[ext_resource type="Script" path="res://cable.gd" id="1_uewlb"]
+
+[node name="Cable" type="Node2D"]
+script = ExtResource("1_uewlb")
+
+[node name="CordLine" type="Line2D" parent="."]
+points = PackedVector2Array(-152, -92, 93, -97)
+width = 5.0
+
+[node name="Connector1" parent="." instance=ExtResource("1_25fy5")]
+position = Vector2(-74, -25)
+
+[node name="Connector2" parent="." instance=ExtResource("1_25fy5")]
+position = Vector2(53, -23)
+
+[connection signal="moved" from="Connector1" to="." method="_on_connector_1_moved"]
+[connection signal="moved" from="Connector2" to="." method="_on_connector_2_moved"]

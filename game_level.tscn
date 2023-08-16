@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyjxrghrelsms"]
+
+[ext_resource type="Script" path="res://game_level.gd" id="1_a24jy"]
+[ext_resource type="PackedScene" uid="uid://cnyxajllsi1yd" path="res://component.tscn" id="2_0lg2h"]
+
+[node name="GameLevel" type="Node2D"]
+script = ExtResource("1_a24jy")
+
+[node name="Cables" type="Node2D" parent="."]
+
+[node name="Component" parent="." instance=ExtResource("2_0lg2h")]
+position = Vector2(209, 150)
+component_name = "Door"
+component_type = "DOOR"
+
+[node name="Component2" parent="." instance=ExtResource("2_0lg2h")]
+position = Vector2(223, 480)
+component_name = "Bridge"
+component_type = "BRIDGE"
+
+[node name="Component3" parent="." instance=ExtResource("2_0lg2h")]
+position = Vector2(889, 160)
+component_name = "Button"
+component_type = "BUTTON"
+
+[node name="ReadyButton" type="Button" parent="."]
+offset_left = 942.0
+offset_top = 532.0
+offset_right = 1123.0
+offset_bottom = 623.0
+text = "Ready"
+
+[connection signal="pressed" from="ReadyButton" to="." method="_on_ready_button_pressed"]

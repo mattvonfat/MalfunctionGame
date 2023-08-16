@@ -1,0 +1,176 @@
+[gd_scene load_steps=15 format=3 uid="uid://cnyxajllsi1yd"]
+
+[ext_resource type="Script" path="res://component.gd" id="1_syytl"]
+[ext_resource type="Texture2D" uid="uid://ciskxqe0lli8x" path="res://resources/images/component.png" id="2_46d2w"]
+[ext_resource type="Texture2D" uid="uid://c6ntp7pgdrc57" path="res://resources/images/light_off.png" id="2_nsxnv"]
+[ext_resource type="Texture2D" uid="uid://djxbab78vmbw1" path="res://resources/images/light_on.png" id="3_jgoet"]
+[ext_resource type="Script" path="res://detector_script.gd" id="4_ge0vn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1w2s"]
+size = Vector2(22.5, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmg5s"]
+size = Vector2(22, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjurs"]
+size = Vector2(57, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rjom"]
+size = Vector2(58, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m23me"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nsxnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jgoet")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trkjw"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3stes"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrch0"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swap3"]
+radius = 55.0
+
+[node name="Component" type="Node2D"]
+script = ExtResource("1_syytl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_46d2w")
+
+[node name="RightConnector" type="Area2D" parent="."]
+position = Vector2(75, -2)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightConnector"]
+position = Vector2(-7.25, 0)
+shape = SubResource("RectangleShape2D_l1w2s")
+
+[node name="LeftConnector" type="Area2D" parent="."]
+position = Vector2(-76, -1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftConnector"]
+position = Vector2(7, -2)
+shape = SubResource("RectangleShape2D_mmg5s")
+
+[node name="TopConnector" type="Area2D" parent="."]
+position = Vector2(-7, -65)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopConnector"]
+position = Vector2(4.5, -3.5)
+shape = SubResource("RectangleShape2D_rjurs")
+
+[node name="BottomConnector" type="Area2D" parent="."]
+position = Vector2(-6, 88)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomConnector"]
+position = Vector2(7, -20.5)
+shape = SubResource("RectangleShape2D_5rjom")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -83.0
+offset_top = 15.0
+offset_right = -43.0
+offset_bottom = 38.0
+
+[node name="LeftLight" type="AnimatedSprite2D" parent="."]
+position = Vector2(-44, -25)
+scale = Vector2(0.354839, 0.354839)
+sprite_frames = SubResource("SpriteFrames_m23me")
+
+[node name="BottomLight" type="AnimatedSprite2D" parent="."]
+position = Vector2(-22, 44)
+scale = Vector2(0.354839, 0.354839)
+sprite_frames = SubResource("SpriteFrames_m23me")
+
+[node name="RightLight" type="AnimatedSprite2D" parent="."]
+position = Vector2(42, 20)
+scale = Vector2(0.354839, 0.354839)
+sprite_frames = SubResource("SpriteFrames_m23me")
+
+[node name="TopLight" type="AnimatedSprite2D" parent="."]
+position = Vector2(15, -43)
+scale = Vector2(0.354839, 0.354839)
+sprite_frames = SubResource("SpriteFrames_m23me")
+
+[node name="OrientationDetectors" type="Node2D" parent="."]
+
+[node name="RightDetector" type="Area2D" parent="OrientationDetectors"]
+position = Vector2(77, -1)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_ge0vn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrientationDetectors/RightDetector"]
+shape = SubResource("CircleShape2D_trkjw")
+
+[node name="LeftDetector" type="Area2D" parent="OrientationDetectors"]
+position = Vector2(-77, -1)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_ge0vn")
+required_orientation = 1
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrientationDetectors/LeftDetector"]
+shape = SubResource("CircleShape2D_3stes")
+
+[node name="TopDetector" type="Area2D" parent="OrientationDetectors"]
+position = Vector2(0, -75)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_ge0vn")
+required_orientation = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrientationDetectors/TopDetector"]
+shape = SubResource("CircleShape2D_nrch0")
+
+[node name="BottomDetector" type="Area2D" parent="OrientationDetectors"]
+position = Vector2(0, 74)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_ge0vn")
+required_orientation = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrientationDetectors/BottomDetector"]
+shape = SubResource("CircleShape2D_swap3")
+
+[node name="ConnectorJoinLocations" type="Node2D" parent="."]
+
+[node name="LeftConnectorJoin" type="Marker2D" parent="ConnectorJoinLocations"]
+unique_name_in_owner = true
+position = Vector2(-88, -3)
+
+[node name="RightConnectorJoin" type="Marker2D" parent="ConnectorJoinLocations"]
+unique_name_in_owner = true
+position = Vector2(84, 0)
+
+[node name="TopConnectorJoin" type="Marker2D" parent="ConnectorJoinLocations"]
+unique_name_in_owner = true
+position = Vector2(0, -86)
+
+[node name="BottomConnectorJoin" type="Marker2D" parent="ConnectorJoinLocations"]
+unique_name_in_owner = true
+position = Vector2(0, 85)
