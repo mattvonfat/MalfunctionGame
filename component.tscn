@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnyxajllsi1yd"]
+[gd_scene load_steps=16 format=3 uid="uid://cnyxajllsi1yd"]
 
 [ext_resource type="Script" path="res://component.gd" id="1_syytl"]
 [ext_resource type="Texture2D" uid="uid://ciskxqe0lli8x" path="res://resources/images/component.png" id="2_46d2w"]
 [ext_resource type="Texture2D" uid="uid://c6ntp7pgdrc57" path="res://resources/images/light_off.png" id="2_nsxnv"]
 [ext_resource type="Texture2D" uid="uid://djxbab78vmbw1" path="res://resources/images/light_on.png" id="3_jgoet"]
 [ext_resource type="Script" path="res://detector_script.gd" id="4_ge0vn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0mtq"]
+size = Vector2(110, 110)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1w2s"]
 size = Vector2(22.5, 58)
@@ -44,11 +47,15 @@ radius = 55.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_swap3"]
 radius = 55.0
 
-[node name="Component" type="Node2D"]
+[node name="Component" type="StaticBody2D"]
 script = ExtResource("1_syytl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_46d2w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_k0mtq")
 
 [node name="RightConnector" type="Area2D" parent="."]
 position = Vector2(75, -2)
@@ -111,7 +118,7 @@ sprite_frames = SubResource("SpriteFrames_m23me")
 [node name="OrientationDetectors" type="Node2D" parent="."]
 
 [node name="RightDetector" type="Area2D" parent="OrientationDetectors"]
-position = Vector2(77, -1)
+position = Vector2(112, -8)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -122,7 +129,7 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_trkjw")
 
 [node name="LeftDetector" type="Area2D" parent="OrientationDetectors"]
-position = Vector2(-77, -1)
+position = Vector2(-110, -1)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -134,7 +141,7 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_3stes")
 
 [node name="TopDetector" type="Area2D" parent="OrientationDetectors"]
-position = Vector2(0, -75)
+position = Vector2(-2, -107)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -146,7 +153,7 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_nrch0")
 
 [node name="BottomDetector" type="Area2D" parent="OrientationDetectors"]
-position = Vector2(0, 74)
+position = Vector2(-1, 108)
 collision_layer = 2
 collision_mask = 0
 monitoring = false

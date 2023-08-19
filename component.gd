@@ -1,14 +1,14 @@
-extends Node2D
+extends StaticBody2D
 
 enum Orientations { LEFT=0, RIGHT, UP, DOWN }
+enum ComponentType { BUTTON=0, DOOR, BRIDGE }
 
-@export var component_name:String = ""
-@export var component_type:String
+var component_name:String = ""
+var component_type:ComponentType
 
 var connections:Array[bool] = [false, false, false, false]
 
 func _ready():
-	$Label.set_text(component_name)
 	$RightConnector.area_entered.connect(_on_connector_area_entered.bind($RightLight))
 	$RightConnector.area_exited.connect(_on_connector_area_exited.bind($RightLight))
 	$LeftConnector.area_entered.connect(_on_connector_area_entered.bind($LeftLight))
@@ -18,6 +18,10 @@ func _ready():
 	$BottomConnector.area_entered.connect(_on_connector_area_entered.bind($BottomLight))
 	$BottomConnector.area_exited.connect(_on_connector_area_exited.bind($BottomLight))
 
+func set_component_data(c_name, c_type):
+	component_name = c_name
+	component_type = c_type
+	$Label.set_text(component_name)
 
 func set_connection(slot:int):
 	$AnimatedSprite2D.set_frame(1)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwodf1brc5i2h"]
+
+[ext_resource type="Texture2D" uid="uid://b11ivfdhl2wu0" path="res://resources/images/room tiles/floor_tile.png" id="1_7xsxr"]
+[ext_resource type="Script" path="res://room tiles/floor_tile.gd" id="1_cmv28"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dn7b"]
+size = Vector2(288, 46)
+
+[node name="FloorTile" type="Node2D"]
+script = ExtResource("1_cmv28")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(144, 384)
+collision_layer = 256
+collision_mask = 256
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+texture = ExtResource("1_7xsxr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 122)
+shape = SubResource("RectangleShape2D_4dn7b")

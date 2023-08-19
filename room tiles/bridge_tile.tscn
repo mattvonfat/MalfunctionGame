@@ -1,0 +1,186 @@
+[gd_scene load_steps=11 format=3 uid="uid://6x3eids3y7q8"]
+
+[ext_resource type="Script" path="res://room tiles/bridge_tile.gd" id="1_64gfx"]
+[ext_resource type="Texture2D" uid="uid://bpwsdb7oke4o0" path="res://resources/images/room tiles/bridge_tile.png" id="1_s8hr6"]
+[ext_resource type="Texture2D" uid="uid://dtxng4v4uodt" path="res://resources/images/room tiles/bridge.png" id="2_odyeb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rr3oa"]
+size = Vector2(18, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8145i"]
+size = Vector2(14, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wt7hn"]
+size = Vector2(129, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilbyd"]
+size = Vector2(134, 46)
+
+[sub_resource type="Animation" id="Animation_yeqxp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BridgePlatformLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 505)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BridgePlatformLeft:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BridgePlatformRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(258, 507)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BridgePlatformRight:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3o7ae"]
+resource_name = "bridge_down"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BridgePlatformLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(30, 505), Vector2(30, 505)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BridgePlatformLeft:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.54307]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BridgePlatformRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(258, 507), Vector2(258, 507)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BridgePlatformRight:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.55571]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwygs"]
+_data = {
+"RESET": SubResource("Animation_yeqxp"),
+"bridge_down": SubResource("Animation_3o7ae")
+}
+
+[node name="BridgeTile" type="Node2D"]
+script = ExtResource("1_64gfx")
+
+[node name="BridgeMain" type="StaticBody2D" parent="."]
+position = Vector2(144, 384)
+collision_layer = 256
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgeMain"]
+texture = ExtResource("1_s8hr6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgeMain"]
+position = Vector2(-135, 122)
+shape = SubResource("RectangleShape2D_rr3oa")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BridgeMain"]
+position = Vector2(137, 122)
+shape = SubResource("RectangleShape2D_8145i")
+
+[node name="BridgePlatformLeft" type="RigidBody2D" parent="."]
+z_index = 8
+position = Vector2(30, 505)
+collision_layer = 256
+collision_mask = 0
+freeze = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgePlatformLeft"]
+position = Vector2(43, 1)
+texture = ExtResource("2_odyeb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgePlatformLeft"]
+position = Vector2(49, 1)
+shape = SubResource("RectangleShape2D_wt7hn")
+
+[node name="BridgePlatformRight" type="RigidBody2D" parent="."]
+z_index = 8
+position = Vector2(258, 507)
+collision_layer = 256
+collision_mask = 0
+freeze = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgePlatformRight"]
+position = Vector2(-43, -1)
+rotation = 3.14159
+texture = ExtResource("2_odyeb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgePlatformRight"]
+position = Vector2(-47, -1)
+shape = SubResource("RectangleShape2D_ilbyd")
+
+[node name="BridgeAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_uwygs")
+}
+
+[connection signal="animation_finished" from="BridgeAnimationPlayer" to="." method="_on_animation_player_animation_finished"]
