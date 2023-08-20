@@ -1,24 +1,334 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyjxrghrelsms"]
+[gd_scene load_steps=9 format=3 uid="uid://dyjxrghrelsms"]
 
 [ext_resource type="Script" path="res://game_level.gd" id="1_a24jy"]
-[ext_resource type="PackedScene" uid="uid://bytx4lbm1ug4o" path="res://node_2d.tscn" id="2_651yd"]
+[ext_resource type="PackedScene" uid="uid://dn55y7wo0k4x4" path="res://circuit_display.tscn" id="2_uvber"]
+[ext_resource type="PackedScene" uid="uid://c7ch42py0uael" path="res://room_display.tscn" id="3_6760i"]
+[ext_resource type="Texture2D" uid="uid://b7uey2dkrgpfh" path="res://resources/images/speech_box.png" id="4_g4hj8"]
+
+[sub_resource type="Animation" id="Animation_1woj4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircuitDisplay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CircuitDisplay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomDisplay:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomDisplay:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ve5xs"]
+resource_name = "room_transition_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircuitDisplay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 768)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CircuitDisplay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomDisplay:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -768), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomDisplay:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_acre1"]
+resource_name = "room_transition_down"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircuitDisplay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 768), Vector2(0, 768), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CircuitDisplay:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomDisplay:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -768)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomDisplay:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47xyy"]
+_data = {
+"RESET": SubResource("Animation_1woj4"),
+"room_transition_down": SubResource("Animation_acre1"),
+"room_transition_up": SubResource("Animation_ve5xs")
+}
 
 [node name="GameLevel" type="Node2D"]
 script = ExtResource("1_a24jy")
 
-[node name="CableContainer" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="CircuitDisplay" parent="." instance=ExtResource("2_uvber")]
+position = Vector2(0, 768)
 
-[node name="ComponentContainer" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="RoomDisplay" parent="." instance=ExtResource("3_6760i")]
 
-[node name="ReadyButton" type="Button" parent="."]
-offset_left = 942.0
-offset_top = 532.0
-offset_right = 1123.0
-offset_bottom = 623.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_47xyy")
+}
+
+[node name="RoundTimer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CircuitHintContainer" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 75
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CircuitHintContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CircuitHintContainer/CenterContainer"]
+custom_minimum_size = Vector2(340, 120)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CircuitHintContainer/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CircuitHintContainer/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HintTextLabel" type="Label" parent="CanvasLayer/CircuitHintContainer/CenterContainer/Panel/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Hint Text
+"
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CircuitTimeContainer" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 55
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CircuitTimeContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+layout_mode = 2
+text = "Time Remaining:"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="RemainingTimeLabel" type="Label" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1:20"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="ReadyButton" type="Button" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+custom_minimum_size = Vector2(104, 54)
+layout_mode = 2
 text = "Ready"
 
-[node name="Room" parent="." instance=ExtResource("2_651yd")]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CircuitTimeContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 60
 
-[connection signal="pressed" from="ReadyButton" to="." method="_on_ready_button_pressed"]
+[node name="RoomTextContainer" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 128
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/RoomTextContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/RoomTextContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_g4hj8")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 45
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/RoomTextContainer/HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/RoomTextContainer/HBoxContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="RoomTextLabel" type="Label" parent="CanvasLayer/RoomTextContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Blah"
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ConvoContinueLabel" type="Label" parent="CanvasLayer/RoomTextContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "<>"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/RoomTextContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 200
+
+[node name="PauseTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/CircuitTimeContainer/HBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

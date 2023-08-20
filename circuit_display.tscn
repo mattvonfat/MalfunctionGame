@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn55y7wo0k4x4"]
+
+[ext_resource type="Script" path="res://circuit_display.gd" id="1_h74p6"]
+[ext_resource type="Texture2D" uid="uid://d30ceog683uw5" path="res://resources/images/circuit_background.png" id="2_k47tb"]
+[ext_resource type="Texture2D" uid="uid://blhsmp3fryvj" path="res://resources/images/metal_frame.png" id="2_n0c6n"]
+
+[node name="CircuitDisplay" type="Node2D"]
+script = ExtResource("1_h74p6")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_k47tb")
+centered = false
+
+[node name="CableContainer" type="Node2D" parent="."]
+
+[node name="ComponentContainer" type="Node2D" parent="."]
+
+[node name="Border" type="Sprite2D" parent="."]
+texture = ExtResource("2_n0c6n")
+centered = false

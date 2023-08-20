@@ -2,7 +2,8 @@ extends Node2D
 
 signal button_activated(body_reference)
 
+func set_number(number:int):
+	$Label.set_text("%s" % number)
+
 func _on_area_2d_body_entered(body):
-	if body.is_leader() == true:
-		body.stop_movement()
-		emit_signal("button_activated", body)
+	emit_signal("button_activated", body)

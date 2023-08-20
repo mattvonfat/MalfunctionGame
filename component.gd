@@ -3,6 +3,7 @@ extends StaticBody2D
 enum Orientations { LEFT=0, RIGHT, UP, DOWN }
 enum ComponentType { BUTTON=0, DOOR, BRIDGE }
 
+var component_id:int
 var component_name:String = ""
 var component_type:ComponentType
 
@@ -18,10 +19,14 @@ func _ready():
 	$BottomConnector.area_entered.connect(_on_connector_area_entered.bind($BottomLight))
 	$BottomConnector.area_exited.connect(_on_connector_area_exited.bind($BottomLight))
 
-func set_component_data(c_name, c_type):
+func set_component_data(c_id, c_name, c_type, c_num):
+	component_id = c_id
 	component_name = c_name
 	component_type = c_type
-	$Label.set_text(component_name)
+	var n = component_name
+	if c_num > 0:
+		n = "%s %s" % [n, c_num]
+	$Label.set_text(n)
 
 func set_connection(slot:int):
 	$AnimatedSprite2D.set_frame(1)
@@ -52,7 +57,7 @@ func _on_connector_area_entered(area, light):
 	light.set_frame(1)
 	
 	var pin_data = area.get_pin_data()
-	pin_data["cable_ref"].set_connection(pin_data["connector_id"], self)
+	pin_data["cable_ref"].set_connection(pin_data["connector_id"], component_id)
 
 func _on_connector_area_exited(area, light):
 	light.set_frame(0)

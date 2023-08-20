@@ -1,12 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7ch42py0uael"]
+[gd_scene load_steps=5 format=3 uid="uid://c7ch42py0uael"]
 
 [ext_resource type="Script" path="res://room_display.gd" id="1_8jjlk"]
 [ext_resource type="PackedScene" uid="uid://2dgboq8qndee" path="res://room tiles/buffer_tile.tscn" id="2_lmqwg"]
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="4_6poxf"]
-[ext_resource type="Script" path="res://follower.gd" id="5_ganpp"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0gel"]
-size = Vector2(36, 59.5)
+[ext_resource type="Texture2D" uid="uid://d0y4ipx3yam8s" path="res://resources/images/room_border.png" id="3_e2m7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gc8vv"]
 size = Vector2(3349, 184)
@@ -29,53 +25,6 @@ position = Vector2(1152, 0)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Enemies"]
-position = Vector2(992, 231)
-collision_layer = 256
-collision_mask = 256
-script = ExtResource("4_6poxf")
-metadata/_edit_group_ = true
-
-[node name="Polygon2D" type="Polygon2D" parent="Enemies/CharacterBody2D"]
-color = Color(0.662745, 0, 0.396078, 1)
-polygon = PackedVector2Array(317, 171, 356, 170, 360, 229, 322, 230)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CharacterBody2D"]
-position = Vector2(338, 202.75)
-shape = SubResource("RectangleShape2D_x0gel")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Enemies/CharacterBody2D"]
-position = Vector2(388, 203)
-remote_path = NodePath("../../CharacterBody2D2")
-
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Enemies/CharacterBody2D"]
-position = Vector2(460, 202)
-remote_path = NodePath("../../CharacterBody2D3")
-
-[node name="CharacterBody2D2" type="CharacterBody2D" parent="Enemies"]
-position = Vector2(1380, 434)
-script = ExtResource("5_ganpp")
-metadata/_edit_group_ = true
-
-[node name="Polygon2D" type="Polygon2D" parent="Enemies/CharacterBody2D2"]
-color = Color(0.662745, 0, 0.396078, 1)
-polygon = PackedVector2Array(-20, -30, 20, -30, 20, 30, -20, 30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CharacterBody2D2"]
-shape = SubResource("RectangleShape2D_x0gel")
-
-[node name="CharacterBody2D3" type="CharacterBody2D" parent="Enemies"]
-position = Vector2(1452, 433)
-script = ExtResource("5_ganpp")
-metadata/_edit_group_ = true
-
-[node name="Polygon2D" type="Polygon2D" parent="Enemies/CharacterBody2D3"]
-color = Color(0.662745, 0, 0.396078, 1)
-polygon = PackedVector2Array(-20, -30, 20, -30, 20, 30, -20, 30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/CharacterBody2D3"]
-shape = SubResource("RectangleShape2D_x0gel")
-
 [node name="DeathZone" type="Area2D" parent="."]
 position = Vector2(534, 816)
 collision_layer = 256
@@ -87,4 +36,22 @@ metadata/_edit_group_ = true
 position = Vector2(59.5, 58)
 shape = SubResource("RectangleShape2D_gc8vv")
 
+[node name="WaitTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="LevelEndTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="EnemyMarker" type="Marker2D" parent="."]
+position = Vector2(1330, 434)
+
+[node name="Border" type="Sprite2D" parent="."]
+z_index = 15
+texture = ExtResource("3_e2m7p")
+centered = false
+
 [connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="LevelEndTimer" to="." method="_on_level_end_timer_timeout"]

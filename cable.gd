@@ -20,12 +20,16 @@ func _ready():
 func set_type(type:int):
 	cable_type = type
 
-func set_connector_position(pin_id:int, new_pos:Vector2):
+func set_connector_position(pin_id:int, new_pos:Vector2, p:int):
+	if p == 1:
+		connectors[pin_id].set_orientation(Orientations.LEFT)
+	elif p == 3:
+		connectors[pin_id].set_orientation(Orientations.UP)
 	connectors[pin_id].global_position = new_pos
 	$CordLine.set_point_position(pin_id, to_local(connectors[pin_id].get_cable_position()))
 
-func set_connection(connector_id:int, component):
-	connected_components[connector_id] = component
+func set_connection(connector_id:int, component_id:int):
+	connected_components[connector_id] = component_id
 
 func clear_connection(connector_id:int):
 	connected_components[connector_id] = null

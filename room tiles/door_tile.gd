@@ -15,4 +15,5 @@ func _on_door_animation_player_animation_finished(anim_name):
 
 # Detects when player has reached door and sends a signal saying whether it is closed or open.
 func _on_door_area_body_entered(body):
-	emit_signal("door_reached", door_open)
+	if $DoorArea.overlaps_body(body):
+		emit_signal("door_reached", door_open)

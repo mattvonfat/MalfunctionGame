@@ -20,6 +20,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("escape"):
 		GameManager.exit_splash_screen()
 
+
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "intro":
 		# cord snaps at this point so need to update the variable to stop the position being updated

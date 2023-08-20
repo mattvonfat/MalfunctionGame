@@ -1,10 +1,9 @@
 extends Control
 
 
-
 func _on_new_game_pressed():
-	pass # Replace with function body.
+	GameManager.start_new_game()
 
 
 func _on_settings_pressed():
-	pass # Replace with function body.
+	GameManager.open_settings()

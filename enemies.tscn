@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw20co0aarweg"]
+
+[ext_resource type="Script" path="res://enemies.gd" id="1_0v1hw"]
+[ext_resource type="Script" path="res://enemy.gd" id="2_mwb8q"]
+[ext_resource type="PackedScene" uid="uid://b364mr5mjrhf3" path="res://person.tscn" id="3_fxdyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7aqc"]
+size = Vector2(36, 59.5)
+
+[node name="Enemies" type="Node2D"]
+script = ExtResource("1_0v1hw")
+
+[node name="Leader" type="CharacterBody2D" parent="."]
+collision_layer = 3840
+collision_mask = 256
+script = ExtResource("2_mwb8q")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leader"]
+shape = SubResource("RectangleShape2D_c7aqc")
+
+[node name="Person" parent="Leader" instance=ExtResource("3_fxdyy")]
+position = Vector2(-40, -81)
+scale = Vector2(0.6, 0.6)
+
+[node name="Follower1" type="CharacterBody2D" parent="."]
+position = Vector2(50, 0)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("2_mwb8q")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Follower1"]
+shape = SubResource("RectangleShape2D_c7aqc")
+
+[node name="Person" parent="Follower1" instance=ExtResource("3_fxdyy")]
+position = Vector2(-38, -81)
+scale = Vector2(0.6, 0.6)
+
+[node name="Follower2" type="CharacterBody2D" parent="."]
+position = Vector2(100, 0)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("2_mwb8q")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Follower2"]
+shape = SubResource("RectangleShape2D_c7aqc")
+
+[node name="Person" parent="Follower2" instance=ExtResource("3_fxdyy")]
+position = Vector2(-36, -80)
+scale = Vector2(0.6, 0.6)
